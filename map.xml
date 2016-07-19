@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<map proto="1.3.3">
+<map proto="1.3.5">
 	<name>Seasonal Wave</name>
-	<version>0.1.1</version>
+	<version>0.1.0</version>
 	<objective>コントロールポイントの制圧 / Capture the Control Point</objective>
 
 	<authors>
@@ -15,7 +15,7 @@
 
 <!-- チームごとの初期装備 -->
 	<kits>
-		<kit name="default">
+		<kit id="default">
 			<!-- ホットバー -->
 			<item slot="9" amount="3" bind="true">Arrow</item>
 			<!--ポーション効果 -->
@@ -23,7 +23,7 @@
 			<potion duration="oo" amplifier="-200">Hunger</potion>
 			<potion duration="oo" amplifier="3">Damage Resistance</potion>
 		</kit>
-		<kit name="red" parents="default">
+		<kit id="red" parents="default">
 			<!-- 装備 -->
 			<helmet color="ff0000" damage="-3000" locked="true">Leather Helmet</helmet>
 			<boots color="ff0000" damage="-3000" locked="true">Leather Boots</boots>
@@ -31,7 +31,7 @@
 			<item slot="7" amount="16" damage="14">Stained Glass</item>
 			<item slot="8" amount="64" damage="14">Stained Clay</item>
 		</kit>
-		<kit name="yellow" parents="default">
+		<kit id="yellow" parents="default">
 			<!-- 装備 -->
 			<helmet color="ffff00" damage="-3000" locked="true">Leather Helmet</helmet>
 			<boots color="ffff00" damage="-3000" locked="true">Leather Boots</boots>
@@ -39,7 +39,7 @@
 			<item slot="7" amount="16" damage="4">Stained Glass</item>
 			<item slot="8" amount="64" damage="4">Stained Clay</item>
 		</kit>
-		<kit name="rage">
+		<kit id="rage">
 			<!-- ホットバー -->
 			<item slot="2" damage="-3000" enchantment="DAMAGE_ALL:1">Diamond Pickaxe</item>
 			<item slot="0">Bow</item>
@@ -51,11 +51,9 @@
 	<spawns>
 		<spawn team="red" yaw="-90" kit="red">
 			<cuboid min="-78,10,56" max="-74,10,60" />
-			<cuboid min="-80,34,-66" max="-76,34,-62" />
 		</spawn>
 		<spawn team="yellow" yaw="90" kit="yellow">
-			<cuboid min="74,10,-60" max="78,10,-56" />
-			<cuboid min="76,34,62" max="80,34,66" />
+			<cuboid min="74,8,-60" max="78,8,-56" />
 		</spawn>
 		<default yaw="0">
 			<cuboid min="-2,50,-1" max="2,50,1" />
@@ -64,8 +62,8 @@
 
 <!-- フィルター定義 -->
 	<filters>
-		<filter name="not-editable" parents="deny-blocks"></filter>
-		<filter name="outside">
+		<filter id="not-editable" parents="deny-blocks"></filter>
+		<filter id="outside">
 			<not>
 				<void/>
 			</not>
@@ -74,45 +72,43 @@
 
 <!-- 領域定義 -->
 	<regions>
-		<rectangle name="map" min="-68,-85" max="68,85" /><!-- マップ全体 -->
+		<rectangle id="map" min="-68,-85" max="68,85" /><!-- マップ全体 -->
 		<!-- チーム拠点定義と保護 -->
-		<union name="Base">
-			<cuboid name="red-base-1" min="-79,6,55" max="-73,255,61"/>
-			<cuboid name="red-base-2" min="-81,32,-67" max="-75,255,-61" />
-			<cuboid name="yellow-base-1" min="73,6,-61" max="79,255,-55"/>
-			<cuboid name="yellow-base-2" min="75,32,61" max="81,255,67" />
+		<union id="Base">
+			<cuboid id="red-base" min="-79,6,55" max="-73,255,61"/>
+			<cuboid id="yellow-base" min="73,6,-61" max="79,255,-55"/>
 		</union>
 		<apply block="not-editable" block-place="deny-all" message="You may not modify bases.">
-			<region name="Base"/>
+			<region id="Base"/>
 		</apply>
 		<!-- CP定義と保護 -->
-		<union name="CP">
-			<cuboid name="R1" min="-85,0,48" max="-54,48,67"></cuboid>
-			<cuboid name="R2" min="-16,0,19" max="15,48,38"></cuboid>
-			<cuboid name="R3" min="-62,0,19" max="-31,48,38"></cuboid>
-			<cuboid name="R4" min="7,0,48" max="38,48,67"></cuboid>
-			<cuboid name="R5" min="-85,0,-10" max="-54,48,9"></cuboid>
-			<cuboid name="R6" min="-39,0,48" max="-8,48,67"></cuboid>
-			<cuboid name="R7" min="-39,0,-10" max="-8,48,9"></cuboid>
-			<cuboid name="R8" min="30,0,19" max="61,48,38"></cuboid>
-			<cuboid name="R9" min="53,0,48" max="84,48,67"></cuboid>
+		<union id="CP">
+			<cuboid id="R1" min="-85,0,48" max="-54,48,67"></cuboid>
+			<cuboid id="R2" min="-16,0,19" max="15,48,38"></cuboid>
+			<cuboid id="R3" min="-62,0,19" max="-31,48,38"></cuboid>
+			<cuboid id="R4" min="7,0,48" max="38,48,67"></cuboid>
+			<cuboid id="R5" min="-85,0,-10" max="-54,48,9"></cuboid>
+			<cuboid id="R6" min="-39,0,48" max="-8,48,67"></cuboid>
+			<cuboid id="R7" min="-39,0,-10" max="-8,48,9"></cuboid>
+			<cuboid id="R8" min="30,0,19" max="61,48,38"></cuboid>
+			<cuboid id="R9" min="53,0,48" max="84,48,67"></cuboid>
 
-			<cuboid name="Y1" min="53,0,-68" max="84,48,-49"></cuboid>
-			<cuboid name="Y2" min="-16,0,-39" max="15,48,-20"></cuboid>
-			<cuboid name="Y3" min="30,0,-39" max="61,48,-20"></cuboid>
-			<cuboid name="Y4" min="-39,0,-68" max="-8,48,-49"></cuboid>
-			<cuboid name="Y5" min="53,0,-10" max="84,48,9"></cuboid>
-			<cuboid name="Y6" min="7,0,-68" max="38,48,-49"></cuboid>
-			<cuboid name="Y7" min="7,0,-10" max="38,48,9"></cuboid>
-			<cuboid name="Y8" min="-62,0,-39" max="-31,48,-20"></cuboid>
-			<cuboid name="Y9" min="-85,0,-68" max="-54,48,-49"></cuboid>
+			<cuboid id="Y1" min="53,0,-68" max="84,48,-49"></cuboid>
+			<cuboid id="Y2" min="-16,0,-39" max="15,48,-20"></cuboid>
+			<cuboid id="Y3" min="30,0,-39" max="61,48,-20"></cuboid>
+			<cuboid id="Y4" min="-39,0,-68" max="-8,48,-49"></cuboid>
+			<cuboid id="Y5" min="53,0,-10" max="84,48,9"></cuboid>
+			<cuboid id="Y6" min="7,0,-68" max="38,48,-49"></cuboid>
+			<cuboid id="Y7" min="7,0,-10" max="38,48,9"></cuboid>
+			<cuboid id="Y8" min="-62,0,-39" max="-31,48,-20"></cuboid>
+			<cuboid id="Y9" min="-85,0,-68" max="-54,48,-49"></cuboid>
 		</union>
 		<apply block="not-editable" block-place="deny-all" message="You may not modify Control Point.">
-			<region name="CP"/>
+			<region id="CP"/>
 		</apply>
 		<apply kit="rage">
 			<negative>
-				<region name="Base"/>
+				<region id="Base"/>
 			</negative>
 		</apply>
 		<!-- 領域外 -->
@@ -124,53 +120,23 @@
 	<!-- CPの定義 -->
 	<controlpoints score-limit="4000">
 	<!-- R -->
-		<controlpoint name="R1" score="10">
+		<controlpoint name="R1" score="10" capture-time="2s">
 			<capture>
-				<cuboid min="-39,0,-68" max="-8,48,-49"></cuboid>
+				<cuboid min="-85,0,48" max="-54,48,67"></cuboid>
 			</capture>
 			<flag>
-				<union>
-					<cuboid min="-39,0,-68" max="-8,6,-49"></cuboid>
-					<cuboid min="-39,12,-68" max="-8,48,-49"></cuboid>
-				</union>
+				<cuboid min="-85,0,48" max="-54,48,67"></cuboid>
 			</flag>
 		</controlpoint>
-		<controlpoint name="R2" score="20">
+		<controlpoint name="R2" score="20" capture-time="4s">
 			<capture>
-				<cuboid min="-16,0,-39" max="15,48,-20"></cuboid>
+				<cuboid min="-16,0,19" max="15,48,38"></cuboid>
 			</capture>
 			<flag>
-				<cuboid min="-16,0,-39" max="15,48,-20"></cuboid>
+				<cuboid min="-16,0,19" max="15,48,38"></cuboid>
 			</flag>
 		</controlpoint>
-		<controlpoint name="R3" score="30">
-			<capture>
-				<cuboid min="-62,0,-39" max="-31,48,-20"></cuboid>
-			</capture>
-			<flag>
-				<cuboid min="-62,0,-39" max="-31,48,-20"></cuboid>
-			</flag>
-		</controlpoint>
-		<controlpoint name="R4" score="40">
-			<capture>
-				<cuboid min="-39,0,-10" max="-8,48,9"></cuboid>
-			</capture>
-			<flag>
-				<cuboid min="-39,0,-10" max="-8,48,9"></cuboid>
-			</flag>
-		</controlpoint>
-		<controlpoint name="R5" score="50">
-			<capture>
-				<cuboid min="-85,0,-10" max="-52,48,9"></cuboid>
-			</capture>
-			<flag>
-				<union>
-					<cuboid min="-85,0,-10" max="-52,6,9"></cuboid>
-					<cuboid min="-85,17,-10" max="-52,48,9"></cuboid>
-				</union>
-			</flag>
-		</controlpoint>
-		<controlpoint name="R6" score="60">
+		<controlpoint name="R3" score="30" capture-time="6s">
 			<capture>
 				<cuboid min="-62,0,19" max="-31,48,38"></cuboid>
 			</capture>
@@ -178,38 +144,48 @@
 				<cuboid min="-62,0,19" max="-31,48,38"></cuboid>
 			</flag>
 		</controlpoint>
-		<controlpoint name="R7" score="70">
-			<capture>
-				<cuboid min="-39,0,48" max="-8,48,67"></cuboid>
-			</capture>
-			<flag>
-				<union>
-					<cuboid min="-39,0,48" max="-8,6,67"></cuboid>
-					<cuboid min="-39,17,48" max="-8,48,67"></cuboid>
-				</union>
-			</flag>
-		</controlpoint>
-		<!-- Y(Rのx,z座標符号反転) -->
-		<controlpoint name="Y1" score="10">
+		<controlpoint name="R4" score="40" capture-time="8s">
 			<capture>
 				<cuboid min="7,0,48" max="38,48,67"></cuboid>
 			</capture>
 			<flag>
 				<union>
-					<cuboid min="7,0,48" max="38,6,67"></cuboid>
-					<cuboid min="7,12,48" max="38,48,67"></cuboid>
+					<cuboid min="7,0,48" max="38,7,67"></cuboid>
+					<cuboid min="7,17,48" max="38,48,67"></cuboid>
 				</union>
 			</flag>
 		</controlpoint>
-		<controlpoint name="Y2" score="20">
+		<controlpoint name="R5" score="50" capture-time="10s">
 			<capture>
-				<cuboid min="-16,0,19" max="15,48,38"></cuboid>
+				<cuboid min="-85,0,-10" max="-52,48,9"></cuboid>
 			</capture>
 			<flag>
-				<cuboid min="-16,0,19" max="15,48,38"></cuboid>
+				<union>
+					<cuboid min="-85,0,-10" max="-52,7,9"></cuboid>
+					<cuboid min="-85,17,-10" max="-52,48,9"></cuboid>
+				</union>
 			</flag>
 		</controlpoint>
-		<controlpoint name="Y3" score="30">
+		<controlpoint name="R6" score="60" capture-time="12s">
+			<capture>
+				<cuboid min="-39,0,48" max="-8,48,67"></cuboid>
+			</capture>
+			<flag>
+				<union>
+					<cuboid min="-39,0,48" max="-8,7,67"></cuboid>
+					<cuboid min="-39,17,48" max="-8,48,67"></cuboid>
+				</union>
+			</flag>
+		</controlpoint>
+		<controlpoint name="R7" score="70" capture-time="14s">
+			<capture>
+				<cuboid min="-39,0,-10" max="-8,48,9"></cuboid>
+			</capture>
+			<flag>
+				<cuboid min="-39,0,-10" max="-8,48,9"></cuboid>
+			</flag>
+		</controlpoint>
+		<controlpoint name="R8" score="80" capture-time="16s">
 			<capture>
 				<cuboid min="30,0,19" max="61,48,38"></cuboid>
 			</capture>
@@ -217,41 +193,101 @@
 				<cuboid min="30,0,19" max="61,48,38"></cuboid>
 			</flag>
 		</controlpoint>
-		<controlpoint name="Y4" score="40">
+		<controlpoint name="R9" score="90" capture-time="18s">
 			<capture>
-				<cuboid min="7,0,-10" max="38,48,9"></cuboid>
+				<cuboid min="53,0,48" max="84,48,67"></cuboid>
 			</capture>
 			<flag>
-				<cuboid min="7,0,-10" max="38,48,9"></cuboid>
+				<union>
+					<cuboid min="53,0,48" max="84,7,67"></cuboid>
+					<cuboid min="53,30,48" max="84,48,67"></cuboid>
+					<cuboid min="53,0,48" max="58,48,58"></cuboid>
+				</union>
 			</flag>
 		</controlpoint>
-		<controlpoint name="Y5" score="50">
+		<!-- Y(Rのx,z座標符号反転) -->
+		<controlpoint name="Y1" score="10" capture-time="2s">
+			<capture>
+				<cuboid min="53,0,-68" max="84,48,-49"></cuboid>
+			</capture>
+			<flag>
+				<cuboid min="53,0,-68" max="84,48,-49"></cuboid>
+			</flag>
+		</controlpoint>
+		<controlpoint name="Y2" score="20" capture-time="4s">
+			<capture>
+				<cuboid min="-16,0,-39" max="15,48,-20"></cuboid>
+			</capture>
+			<flag>
+				<cuboid min="-16,0,-39" max="15,48,-20"></cuboid>
+			</flag>
+		</controlpoint>
+		<controlpoint name="Y3" score="30" capture-time="6s">
+			<capture>
+				<cuboid min="30,0,-39" max="61,48,-20"></cuboid>
+			</capture>
+			<flag>
+				<cuboid min="30,0,-39" max="61,48,-20"></cuboid>
+			</flag>
+		</controlpoint>
+		<controlpoint name="Y4" score="40" capture-time="8s">
+			<capture>
+				<cuboid min="-39,0,-68" max="-8,48,-49"></cuboid>
+			</capture>
+			<flag>
+				<union>
+					<cuboid min="-39,0,-68" max="-8,48,-49"></cuboid>
+					<cuboid min="-39,0,-68" max="-8,48,-49"></cuboid>
+				</union>
+			</flag>
+		</controlpoint>
+		<controlpoint name="Y5" score="50" capture-time="10s">
 			<capture>
 				<cuboid min="53,0,-10" max="84,48,9"></cuboid>
 			</capture>
 			<flag>
 				<union>
-					<cuboid min="53,0,-10" max="84,6,9"></cuboid>
+					<cuboid min="53,0,-10" max="84,7,9"></cuboid>
 					<cuboid min="53,17,-10" max="84,48,9"></cuboid>
 				</union>
 			</flag>
 		</controlpoint>
-		<controlpoint name="Y6" score="60">
-			<capture>
-				<cuboid min="30,0,-39" max="61,48,-20"></cuboid>
-			</capture>
-			<flag>
-				<cuboid min="30,0,-39" max="61,48,-20"></cuboid>
-			</flag>
-		</controlpoint>
-		<controlpoint name="Y7" score="70">
+		<controlpoint name="Y6" score="60" capture-time="12s">
 			<capture>
 				<cuboid min="7,0,-68" max="38,48,-49"></cuboid>
 			</capture>
 			<flag>
 				<union>
-					<cuboid min="7,0,-68" max="38,6,-49"></cuboid>
+					<cuboid min="7,0,-68" max="38,7,-49"></cuboid>
 					<cuboid min="7,17,-68" max="38,48,-49"></cuboid>
+				</union>
+			</flag>
+		</controlpoint>
+		<controlpoint name="Y7" score="70" capture-time="14s">
+			<capture>
+				<cuboid min="7,0,-10" max="38,48,9"></cuboid>
+			</capture>
+			<flag>
+				<cuboid min="7,0,-10" max="38,48,9"></cuboid>
+			</flag>
+		</controlpoint>
+		<controlpoint name="Y8" score="80" capture-time="16s">
+			<capture>
+				<cuboid min="-62,0,-39" max="-31,48,-20"></cuboid>
+			</capture>
+			<flag>
+				<cuboid min="-62,0,-39" max="-31,48,-20"></cuboid>
+			</flag>
+		</controlpoint>
+		<controlpoint name="Y9" score="90" capture-time="18s">
+			<capture>
+				<cuboid min="-85,0,-68" max="-54,48,-49"></cuboid>
+			</capture>
+			<flag>
+				<union>
+					<cuboid min="-85,0,-68" max="-54,6,-49"></cuboid>
+					<cuboid min="-85,30,-68" max="-54,48,-49"></cuboid>
+					<cuboid min="-59,0,-59" max="-54,48,-49"></cuboid>
 				</union>
 			</flag>
 		</controlpoint>
@@ -362,14 +398,13 @@
 	<!--  落下ダメージ無効  -->
 	<disabledamage>
 		<damage>fall</damage>
-		<damage>suffocation</damage>
 	</disabledamage>
 
 	<!-- ブロックドロップ拒否 -->
 	<blockdrops>
 		<rule>
 			<region>
-				<region name="map"/>
+				<region id="map"/>
 			</region>
 			<filter>
 				<block>Stained Clay</block>
