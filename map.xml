@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map proto="1.3.3">
 	<name>Seasonal Wave</name>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<objective>コントロールポイントの制圧 / Capture the Control Point</objective>
 
 	<authors>
@@ -12,7 +12,7 @@
 		<team max="12" color="red">Red Team</team>
 		<team max="12" color="yellow">Yellow Team</team>
 	</teams>
-
+5
 <!-- チームごとの初期装備 -->
 	<kits>
 		<kit name="default">
@@ -28,22 +28,22 @@
 			<helmet color="ff0000" damage="-3000" locked="true">Leather Helmet</helmet>
 			<boots color="ff0000" damage="-3000" locked="true">Leather Boots</boots>
 			<!-- ホットバー -->
-			<item slot="7" amount="16" damage="14">Stained Glass</item>
-			<item slot="8" amount="64" damage="14">Stained Clay</item>
+			<item slot="7" amount="16">Glass</item>
+			<item slot="8" amount="64">Nether Brick</item>
 		</kit>
 		<kit name="yellow" parents="default">
 			<!-- 装備 -->
 			<helmet color="ffff00" damage="-3000" locked="true">Leather Helmet</helmet>
 			<boots color="ffff00" damage="-3000" locked="true">Leather Boots</boots>
 			<!-- ホットバー -->
-			<item slot="7" amount="16" damage="4">Stained Glass</item>
-			<item slot="8" amount="64" damage="4">Stained Clay</item>
+			<item slot="7" amount="16">Glass</item>
+			<item slot="8" amount="64">Nether Brick</item>
 		</kit>
 		<kit name="rage">
 			<!-- ホットバー -->
-			<item slot="2" damage="-3000" enchantment="DAMAGE_ALL:1">Diamond Pickaxe</item>
-			<item slot="0">Bow</item>
-			<potion duration="oo" amplifier="-500">Damage Resistance</potion>
+			<item slot="2" damage="-3000" enchantment="DAMAGE_ALL:5">Diamond Pickaxe</item>
+			<item slot="0" enchantment="DAMAGE_ALL:5;Arrow Damage:5">Bow</item>
+			<potion duration="oo" amplifier="-60">Damage Resistance</potion>
 		</kit>
 	</kits>
 
@@ -70,6 +70,12 @@
 				<void/>
 			</not>
 		</filter>
+		<filter name="block-modify-limitation" parents="deny-all">
+			<allow>
+				<block>Nether Brick</block>
+				<block>Glass</block>
+			</allow>
+</filter>
 	</filters>
 
 <!-- 領域定義 -->
@@ -82,7 +88,7 @@
 			<cuboid name="yellow-base-1" min="73,6,-61" max="79,255,-55"/>
 			<cuboid name="yellow-base-2" min="75,32,61" max="81,255,67" />
 		</union>
-		<apply block="not-editable" block-place="deny-all" message="You may not modify bases.">
+		<apply block="not-editable" block-place="deny-all" message="地形の編集はできません。You may not modify bases.">
 			<region name="Base"/>
 		</apply>
 		<!-- CP定義と保護 -->
@@ -107,7 +113,7 @@
 			<cuboid name="Y8" min="-62,0,-39" max="-31,48,-20"></cuboid>
 			<cuboid name="Y9" min="-85,0,-68" max="-54,48,-49"></cuboid>
 		</union>
-		<apply block="not-editable" block-place="deny-all" message="You may not modify Control Point.">
+		<apply block="block-modify-limitation" message="特定ブロック(ガラスとネザーレンガ)以外の編集はできません。/You can not modify blocks except Glass nad Nether Brick.">
 			<region name="CP"/>
 		</apply>
 		<apply kit="rage">
@@ -116,7 +122,7 @@
 			</negative>
 		</apply>
 		<!-- 領域外 -->
-		<apply block="outside" message="You may not modify void area.">
+		<apply block="outside" message="範囲外の編集はできません。/You may not modify void area.">
 			<rectangle min="-oo,-oo" max="oo,oo"/>
 		</apply>
 	</regions>
@@ -261,8 +267,7 @@
 		<item>Bow</item>
 		<item>Arrow</item>
 		<item>Golden Carrot</item>
-		<item>Stained Clay</item>
-		<item>Stained Glass</item>
+		<item>Nether Brick</item>
 		<item>Glass</item>
 		<item>Leather Helmet</item>
 		<item>Leather Boots</item>
@@ -271,7 +276,7 @@
 	<!-- キル報酬 -->
 	<killreward>
 		<item amount="3">Arrow</item>
-		<item amount="16">Glass</item>
+		<item amount="24">Glass</item>
 	</killreward>
 	
 	<killreward>
@@ -372,8 +377,7 @@
 				<region name="map"/>
 			</region>
 			<filter>
-				<block>Stained Clay</block>
-				<block>Stained Glass</block>
+				<block>Nether Brick</block>
 			</filter>
 		</rule>
 	</blockdrops>
