@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map proto="1.3.3">
 	<name>Seasonal Wave</name>
-	<version>0.1.3</version>
+	<version>0.1.4</version>
 	<objective>コントロールポイントの制圧 / Capture the Control Point</objective>
 
 	<authors>
@@ -28,7 +28,8 @@
 			<helmet color="ff0000" damage="-3000" locked="true">Leather Helmet</helmet>
 			<boots color="ff0000" damage="-3000" locked="true">Leather Boots</boots>
 			<!-- ホットバー -->
-			<item slot="7" amount="16">Glass</item>
+			<item slot="6" amount="32">Glass</item>
+			<item slot="7" amount="64">Nether Brick</item>
 			<item slot="8" amount="64">Nether Brick</item>
 		</kit>
 		<kit name="yellow" parents="default">
